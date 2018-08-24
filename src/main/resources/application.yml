@@ -1,0 +1,75 @@
+server:
+  port: 7020
+spring:
+  application:
+    name: auth-server
+  redis:
+    host: 10.33.80.101
+    port: 6379
+
+  zipkin:
+    kafka:
+      topic: zipkin
+
+  kafka:
+    bootstrap-servers: 10.33.80.101:9092
+
+  sleuth:
+    sampler:
+      percentage: 1.0
+
+
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+
+oauth:
+  client:
+    jwtSigningKey: jwtSigningKey
+    clients[0]:
+      clientId: out-wechat
+      clientSecret: outSecret
+      accessTokenValidateSeconds: 20
+      scope: "*"
+      clientType: wechat
+      wechatAppId: wxa4ea35b0027a480d
+      wechatSecret: 5322490f4d2bf839ff57e07038e42eb3
+      wechatToken: qqlei
+      wechatAesKey:
+      findUserClassName: com.auth.server.fegin.OutWechatFegin
+    clients[1]:
+      clientId: collection-server
+      clientSecret: collectionSecret
+      accessTokenValidateSeconds: 7200
+      scope: "*"
+    clients[2]:
+      clientId: customer-wechat
+      clientSecret: customerSecret
+      accessTokenValidateSeconds: 7200
+      scope: "*"
+      clientType: wechat
+      wechatAppId: wxa4ea35b0027a480d #wx77845210c27faa3a
+      wechatSecret: 5322490f4d2bf839ff57e07038e42eb3 #04c2aaa7e054579ec2d73f94879616a8
+      wechatToken: qqlei #Seng
+      wechatAesKey:
+      findUserClassName: com.auth.server.fegin.CustomerWechatFegin
+      smsAuthSuccessHandler: customerSmsAuthSuccessHandler
+
+    handlers[0]:
+      auth_type: wechat
+      authSuccessHandler: wechatAuthenticationSuccessHandler
+      authFailureHandler: wechatAuthenticationFailureHandler
+
+    handlers[1]:
+      auth_type: sms
+      authSuccessHandler: smsAuthenticationSuccessHandler
+      authFailureHandler: smsAuthenticationFailureHandler
+
+ding:
+  appid: dingoanvwzywxpqf7wh02u
+  appsecret: 6kwRXPawkcZ91ouHALBSurtqV8lBXoXPyd9dWl0e9X0piWPoNgrirv42_4vdtmrU
+  corpid: ding951c64ba07e7e73835c2f4657eb6378f
+  corpsecret: VYWz1onq3S_7eAOadFYPyZ-mtA0238XjsdXMoqu97AOX1ykIbdClfA5k5nmNkJvZ
+
+
