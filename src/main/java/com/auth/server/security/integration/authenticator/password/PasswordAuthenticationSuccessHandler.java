@@ -1,4 +1,4 @@
-package com.auth.server.security.integration.authenticator;
+package com.auth.server.security.integration.authenticator.password;
 
 import com.alibaba.fastjson.JSONObject;
 import com.auth.server.security.constants.SecurityConstant;
@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  * Created by 李雷 on 2018/8/9.
  */
 @Component
-public class DefaultAuthSuccessHandler implements AuthSuccessHandler {
+public class PasswordAuthenticationSuccessHandler implements AuthSuccessHandler {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -45,7 +45,7 @@ public class DefaultAuthSuccessHandler implements AuthSuccessHandler {
         stringRedisTemplate.opsForValue().set(sessionKey,jsonObject.toJSONString(),clientDetails.getAccessTokenValiditySeconds(), TimeUnit.SECONDS);
         response.setContentType("application/json;charset=UTF-8");
         Map<String,String> result = new HashMap<>();
-        result.put("resultCode",sysUserAuthentication.getStatus());
+        result.put("resultCode",SecurityConstant.AUTH_LOGIN_SUCCESS_STATUS);
         result.put("appToken",token.getValue());
         response.getWriter().write(JSONObject.toJSONString(result));
     }

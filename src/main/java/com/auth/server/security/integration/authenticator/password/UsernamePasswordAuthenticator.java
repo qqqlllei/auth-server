@@ -1,8 +1,9 @@
-package com.auth.server.security.integration.authenticator;
+package com.auth.server.security.integration.authenticator.password;
 
 import com.auth.server.fegin.UserFegin;
 import com.auth.server.security.constants.SecurityConstant;
 import com.auth.server.security.integration.IntegrationAuthentication;
+import com.auth.server.security.integration.authenticator.IntegrationAuthenticator;
 import com.auth.server.security.vo.SysUserAuthentication;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

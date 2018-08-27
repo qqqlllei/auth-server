@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Created by 李雷 on 2018/7/10.
  */
-@FeignClient(name = "user-server" ,url = "${provider-user.ribbon.listOfServers}")
+@FeignClient(name = "user-server" ,url = "outer.inner.zhongjiaxin.com")
 @RequestMapping("/riskUserLogin")
 public interface UserFegin {
 

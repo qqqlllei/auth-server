@@ -72,10 +72,10 @@ oauth:
       authSuccessHandler: smsAuthenticationSuccessHandler
       authFailureHandler: smsAuthenticationFailureHandler
 
-    handlers[3]:
+    handlers[2]:
       auth_type: password
-      authSuccessHandler: defaultAuthSuccessHandler
-      authFailureHandler: defaultAuthFailureHandler
+      authSuccessHandler: passwordAuthenticationSuccessHandler
+      authFailureHandler: passwordAuthenticationFailureHandler
 
 ding:
   appid: dingoanvwzywxpqf7wh02u
