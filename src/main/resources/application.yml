@@ -56,6 +56,12 @@ oauth:
       findUserClassName: com.auth.server.fegin.CustomerWechatFegin
       smsAuthSuccessHandler: customerSmsAuthSuccessHandler
 
+    clients[3]:
+      clientId: post-loan-back
+      clientSecret: postLoanBackSecret
+      accessTokenValidateSeconds: 7200
+      scope: "*"
+
     handlers[0]:
       auth_type: wechat
       authSuccessHandler: wechatAuthenticationSuccessHandler
@@ -65,6 +71,11 @@ oauth:
       auth_type: sms
       authSuccessHandler: smsAuthenticationSuccessHandler
       authFailureHandler: smsAuthenticationFailureHandler
+
+    handlers[3]:
+      auth_type: password
+      authSuccessHandler: defaultAuthSuccessHandler
+      authFailureHandler: defaultAuthFailureHandler
 
 ding:
   appid: dingoanvwzywxpqf7wh02u

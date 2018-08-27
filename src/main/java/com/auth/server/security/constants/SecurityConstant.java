@@ -13,6 +13,8 @@ public class SecurityConstant {
 
     public static final String AUTH_AUTHORIZED_GRANT_PASSWORD ="password";
 
+    public static final String AUTH_AUTHORIZED_GRANT_LOGIN_NAME ="loginName";
+
     public static final String WECHAT_AUTH_TYPE = "wechat";
 
     public static final String APP_TOKEN_NAME="appToken";

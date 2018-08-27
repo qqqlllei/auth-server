@@ -7,10 +7,12 @@ import com.auth.server.security.vo.SysUserAuthentication;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -20,9 +22,19 @@ public class UsernamePasswordAuthenticator implements IntegrationAuthenticator {
     @Autowired
     private UserFegin userFegin;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public SysUserAuthentication authenticate(IntegrationAuthentication integrationAuthentication) {
-        SysUserAuthentication sysUserAuthentication = userFegin.findUserByUsername(integrationAuthentication.getUsername());
+        String password = integrationAuthentication.getAuthParameter(SecurityConstant.AUTH_AUTHORIZED_GRANT_PASSWORD);
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put(SecurityConstant.AUTH_AUTHORIZED_GRANT_LOGIN_NAME, integrationAuthentication.getUsername());
+        paramMap.put(SecurityConstant.AUTH_AUTHORIZED_GRANT_PASSWORD, password);
+        SysUserAuthentication sysUserAuthentication = userFegin.queryLoginUser(paramMap);
+        if(sysUserAuthentication !=null){
+            sysUserAuthentication.setPassword(passwordEncoder.encode(password));
+        }
         return sysUserAuthentication;
     }
 
