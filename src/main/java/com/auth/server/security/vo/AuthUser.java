@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class User implements UserDetails, CredentialsContainer {
+public class AuthUser implements UserDetails, CredentialsContainer {
 
     private String id;
     private String username;

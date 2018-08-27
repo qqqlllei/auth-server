@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.auth.server.fegin.CustomerWechatFegin;
 import com.auth.server.security.constants.SecurityConstant;
 import com.auth.server.security.integration.AuthSuccessHandler;
-import com.auth.server.security.vo.SysUserAuthentication;
+import com.auth.server.security.vo.AuthUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.core.Authentication;
@@ -43,7 +43,7 @@ public class CustomerSmsAuthSuccessHandler implements AuthSuccessHandler {
 
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication, OAuth2AccessToken token, OAuth2Authentication oAuth2Authentication, SysUserAuthentication sysUserAuthentication, ClientDetails clientDetails) throws ServletException, IOException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication, OAuth2AccessToken token, OAuth2Authentication oAuth2Authentication, AuthUser sysUserAuthentication, ClientDetails clientDetails) throws ServletException, IOException {
 
         String appToken = request.getParameter(SecurityConstant.APP_TOKEN_NAME);
         OAuth2AccessToken oAuth2AccessToken = resourceServerTokenServices.readAccessToken(appToken);

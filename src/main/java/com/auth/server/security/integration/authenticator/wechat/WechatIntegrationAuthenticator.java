@@ -6,12 +6,11 @@ import com.auth.server.fegin.WechatFegin;
 import com.auth.server.security.constants.SecurityConstant;
 import com.auth.server.security.integration.IntegrationAuthentication;
 import com.auth.server.security.integration.authenticator.IntegrationAuthenticator;
-import com.auth.server.security.vo.SysUserAuthentication;
+import com.auth.server.security.vo.AuthUser;
 import com.auth.server.util.ApplicationContextHelper;
 import com.auth.server.util.RestResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,14 +34,14 @@ public class WechatIntegrationAuthenticator implements IntegrationAuthenticator 
 
 
     @Override
-    public SysUserAuthentication authenticate(IntegrationAuthentication integrationAuthentication)  {
+    public AuthUser authenticate(IntegrationAuthentication integrationAuthentication)  {
 
         String openId = integrationAuthentication.getUsername();
 
         String password = integrationAuthentication.getAuthParameter(SecurityConstant.AUTH_AUTHORIZED_GRANT_PASSWORD);
 
         LoginAbstractFegin loginAbstractFegin = ApplicationContextHelper.getBean(integrationAuthentication.getFindUserClassName(), LoginAbstractFegin.class);
-        SysUserAuthentication sysUserAuthentication=loginAbstractFegin.findUserById(openId);
+        AuthUser sysUserAuthentication=loginAbstractFegin.findUserById(openId);
 
         if (sysUserAuthentication != null) {
             sysUserAuthentication.setPassword(passwordEncoder.encode(password));

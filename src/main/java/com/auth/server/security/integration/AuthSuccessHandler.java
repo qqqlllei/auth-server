@@ -1,6 +1,6 @@
 package com.auth.server.security.integration;
 
-import com.auth.server.security.vo.SysUserAuthentication;
+import com.auth.server.security.vo.AuthUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -18,5 +18,5 @@ public interface AuthSuccessHandler {
 
     void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                  Authentication authentication, OAuth2AccessToken token, OAuth2Authentication oAuth2Authentication,
-                                 SysUserAuthentication sysUserAuthentication, ClientDetails clientDetails) throws ServletException, IOException ;
+                                 AuthUser sysUserAuthentication, ClientDetails clientDetails) throws ServletException, IOException ;
 }

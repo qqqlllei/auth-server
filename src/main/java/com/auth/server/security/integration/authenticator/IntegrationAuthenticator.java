@@ -2,7 +2,7 @@ package com.auth.server.security.integration.authenticator;
 
 
 import com.auth.server.security.integration.IntegrationAuthentication;
-import com.auth.server.security.vo.SysUserAuthentication;
+import com.auth.server.security.vo.AuthUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +15,7 @@ public interface IntegrationAuthenticator {
      * @param integrationAuthentication
      * @return
      */
-    SysUserAuthentication authenticate(IntegrationAuthentication integrationAuthentication) ;
+    AuthUser authenticate(IntegrationAuthentication integrationAuthentication) ;
 
 
     /**

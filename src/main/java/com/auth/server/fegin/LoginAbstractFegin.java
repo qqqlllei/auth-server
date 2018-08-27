@@ -1,13 +1,13 @@
 package com.auth.server.fegin;
 
-import com.auth.server.security.vo.SysUserAuthentication;
+import com.auth.server.security.vo.AuthUser;
 
 /**
  * Created by 李雷 on 2018/8/10.
  */
 public interface LoginAbstractFegin {
 
-    SysUserAuthentication findUserById(String id);
+    AuthUser findUserById(String id);
 
-    SysUserAuthentication findUserByPhone(String phone);
+    AuthUser findUserByPhone(String phone);
 }

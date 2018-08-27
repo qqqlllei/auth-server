@@ -5,7 +5,7 @@ import com.auth.server.security.constants.SecurityConstant;
 import com.auth.server.security.dingding.DingTokenServer;
 import com.auth.server.security.integration.IntegrationAuthentication;
 import com.auth.server.security.integration.authenticator.IntegrationAuthenticator;
-import com.auth.server.security.vo.SysUserAuthentication;
+import com.auth.server.security.vo.AuthUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +28,9 @@ public class DingDingIntegrationAuthenticator implements IntegrationAuthenticato
     private UserFegin userFegin;
 
     @Override
-    public SysUserAuthentication authenticate(IntegrationAuthentication integrationAuthentication) {
+    public AuthUser authenticate(IntegrationAuthentication integrationAuthentication) {
         String phone = integrationAuthentication.getUsername();
-        SysUserAuthentication sysUserAuthentication = userFegin.findUserByPhoneNumber(phone);
+        AuthUser sysUserAuthentication = userFegin.findUserByPhoneNumber(phone);
         return sysUserAuthentication;
     }
 

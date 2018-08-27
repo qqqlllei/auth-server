@@ -1,6 +1,6 @@
 package com.auth.server.fegin;
 
-import com.auth.server.security.vo.SysUserAuthentication;
+import com.auth.server.security.vo.AuthUser;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,5 +13,5 @@ public interface OutWechatFegin extends LoginAbstractFegin{
 
     @Override
     @RequestMapping(value="/channelStaff/findUserByOpenId")
-    SysUserAuthentication findUserById(@RequestParam("openId") String openId);
+    AuthUser findUserById(@RequestParam("openId") String openId);
 }

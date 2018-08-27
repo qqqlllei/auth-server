@@ -4,7 +4,7 @@ import com.auth.server.fegin.UserFegin;
 import com.auth.server.security.constants.SecurityConstant;
 import com.auth.server.security.integration.IntegrationAuthentication;
 import com.auth.server.security.integration.authenticator.IntegrationAuthenticator;
-import com.auth.server.security.vo.SysUserAuthentication;
+import com.auth.server.security.vo.AuthUser;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -27,12 +27,12 @@ public class UsernamePasswordAuthenticator implements IntegrationAuthenticator {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public SysUserAuthentication authenticate(IntegrationAuthentication integrationAuthentication) {
+    public AuthUser authenticate(IntegrationAuthentication integrationAuthentication) {
         String password = integrationAuthentication.getAuthParameter(SecurityConstant.AUTH_AUTHORIZED_GRANT_PASSWORD);
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put(SecurityConstant.AUTH_AUTHORIZED_GRANT_LOGIN_NAME, integrationAuthentication.getUsername());
         paramMap.put(SecurityConstant.AUTH_AUTHORIZED_GRANT_PASSWORD, password);
-        SysUserAuthentication sysUserAuthentication = userFegin.queryLoginUser(paramMap);
+        AuthUser sysUserAuthentication = userFegin.queryLoginUser(paramMap);
         if(sysUserAuthentication !=null){
             sysUserAuthentication.setPassword(passwordEncoder.encode(password));
         }

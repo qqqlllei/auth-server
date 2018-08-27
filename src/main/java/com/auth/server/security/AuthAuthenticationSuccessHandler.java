@@ -2,7 +2,7 @@ package com.auth.server.security;
 
 import com.auth.server.security.constants.SecurityConstant;
 import com.auth.server.security.integration.AuthSuccessHandler;
-import com.auth.server.security.vo.SysUserAuthentication;
+import com.auth.server.security.vo.AuthUser;
 import com.auth.server.util.ApplicationContextHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class AuthAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
 
-		SysUserAuthentication sysUserAuthentication = new SysUserAuthentication();
+		AuthUser sysUserAuthentication = new AuthUser();
 		BeanUtils.copyProperties(authentication.getPrincipal(), sysUserAuthentication);
 		String clientId = request.getParameter(SecurityConstant.REQUEST_CLIENT_ID);
 		ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);

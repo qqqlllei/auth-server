@@ -1,6 +1,6 @@
 package com.auth.server.security.jwt;
 
-import com.auth.server.security.vo.User;
+import com.auth.server.security.vo.AuthUser;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -21,7 +21,7 @@ public class JWTTokenEnhancer implements TokenEnhancer {
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
         String clientId = authentication.getOAuth2Request().getClientId();
         Map<String, Object> additionalInfo = new HashMap<>();
-        User user = (User) authentication.getPrincipal();
+        AuthUser user = (AuthUser) authentication.getPrincipal();
         additionalInfo.put(OPEN_ID, user.getId());
         additionalInfo.put(CLIENT_ID,clientId);
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
