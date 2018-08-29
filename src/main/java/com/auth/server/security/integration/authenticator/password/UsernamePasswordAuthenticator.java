@@ -1,5 +1,6 @@
 package com.auth.server.security.integration.authenticator.password;
 
+import com.alibaba.fastjson.JSONObject;
 import com.auth.server.fegin.UserFegin;
 import com.auth.server.security.constants.SecurityConstant;
 import com.auth.server.security.integration.IntegrationAuthentication;
@@ -32,7 +33,15 @@ public class UsernamePasswordAuthenticator implements IntegrationAuthenticator {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put(SecurityConstant.AUTH_AUTHORIZED_GRANT_LOGIN_NAME, integrationAuthentication.getUsername());
         paramMap.put(SecurityConstant.AUTH_AUTHORIZED_GRANT_PASSWORD, password);
-        AuthUser sysUserAuthentication = userFegin.queryLoginUser(paramMap);
+        Map<String,Object> loginUserResult = userFegin.queryLoginUser(paramMap);
+        AuthUser sysUserAuthentication = null;
+        if(SecurityConstant.AUTH_LOGIN_SUCCESS_STATUS.equals(loginUserResult.get(SecurityConstant.AUTH_LOGIN_CODE_NAME))){
+            JSONObject user = (JSONObject) JSONObject.toJSON(loginUserResult.get("user"));
+            sysUserAuthentication = JSONObject.parseObject(user.toJSONString(),AuthUser.class);
+            sysUserAuthentication.setPwdStatus(String.valueOf(loginUserResult.get("resultCodePwd")));
+        }
+
+
         if(sysUserAuthentication !=null){
             sysUserAuthentication.setPassword(passwordEncoder.encode(password));
         }

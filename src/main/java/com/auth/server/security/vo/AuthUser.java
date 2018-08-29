@@ -26,6 +26,10 @@ public class AuthUser implements UserDetails, CredentialsContainer {
     private Collection<GrantedAuthority> grantedAuthorities;
     private Long tenantId;
     private String openId;
+    private String pwdStatus;
+
+    public AuthUser() {
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -164,5 +168,13 @@ public class AuthUser implements UserDetails, CredentialsContainer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getPwdStatus() {
+        return pwdStatus;
+    }
+
+    public void setPwdStatus(String pwdStatus) {
+        this.pwdStatus = pwdStatus;
     }
 }

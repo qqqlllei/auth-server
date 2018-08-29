@@ -74,6 +74,8 @@ public class SecurityConstant {
 
     public static final String AUTH_LOGIN_SUCCESS_STATUS="0000";
 
+    public static final String AUTH_LOGIN_CODE_NAME="resultCode";
+
 
 
 }

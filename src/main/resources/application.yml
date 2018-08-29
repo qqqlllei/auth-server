@@ -84,3 +84,5 @@ ding:
   corpsecret: VYWz1onq3S_7eAOadFYPyZ-mtA0238XjsdXMoqu97AOX1ykIbdClfA5k5nmNkJvZ
 
 
+user-server:
+  url: 10.0.8.199:8083

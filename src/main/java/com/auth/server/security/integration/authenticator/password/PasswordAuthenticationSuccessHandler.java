@@ -47,6 +47,7 @@ public class PasswordAuthenticationSuccessHandler implements AuthSuccessHandler 
         Map<String,String> result = new HashMap<>();
         result.put("resultCode",SecurityConstant.AUTH_LOGIN_SUCCESS_STATUS);
         result.put("appToken",token.getValue());
+        result.put("pwdStatus",sysUserAuthentication.getPwdStatus());
         response.getWriter().write(JSONObject.toJSONString(result));
     }
 }

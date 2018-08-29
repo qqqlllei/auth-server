@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Created by 李雷 on 2018/7/10.
  */
-@FeignClient(name = "user-server" ,url = "outer.inner.zhongjiaxin.com")
+@FeignClient(name = "user-server",url = "${user-server.url}")
 @RequestMapping("/riskUserLogin")
 public interface UserFegin {
 
@@ -20,7 +20,7 @@ public interface UserFegin {
     AuthUser findUserByUsername(@RequestParam("name") String name);
 
     @RequestMapping(value = "/queryLoginUser", method = RequestMethod.POST)
-    AuthUser queryLoginUser(@RequestBody Map<String, Object> paramMap);
+    Map<String,Object> queryLoginUser(@RequestBody Map<String, Object> paramMap);
 
     @RequestMapping(value="/findUserByPhoneNumber")
     AuthUser findUserByPhoneNumber(@RequestParam("phone") String phone);
