@@ -20,6 +20,7 @@ public class AuthUser implements UserDetails, CredentialsContainer {
     private String phone;
     private String email;
     private String name;
+    private String realName;
     private String certNo;
     private Collection<String> resources = new ArrayList<String>();
     private Collection<String> roles = new ArrayList<String>();
@@ -176,5 +177,13 @@ public class AuthUser implements UserDetails, CredentialsContainer {
 
     public void setPwdStatus(String pwdStatus) {
         this.pwdStatus = pwdStatus;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 }
