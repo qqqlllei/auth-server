@@ -58,7 +58,7 @@ public class AuthenticationWeb {
                 return result;
             }
 
-            result.put("resultCode","0000");
+
 
             result = oAuth2AccessToken.getAdditionalInformation();
             if(result.containsKey(SecurityConstant.AUTH_SESSION_KEY) && result.containsKey(SecurityConstant.REQUEST_CLIENT_ID)){
@@ -69,7 +69,7 @@ public class AuthenticationWeb {
                 stringRedisTemplate.opsForValue().set(sessionKey,sessionValue,clientDetails.getAccessTokenValiditySeconds(), TimeUnit.SECONDS);
             }
 
-
+            result.put("resultCode","0000");
         }catch(Exception e){
             result.put("resultCode","3333");
             result.put("resultMsg","Token= "+token+" 已被损坏");
