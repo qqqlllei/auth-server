@@ -38,7 +38,7 @@ public class WechatIntegrationAuthenticator implements IntegrationAuthenticator 
 
         String openId = integrationAuthentication.getUsername();
 
-        String password = integrationAuthentication.getAuthParameter(SecurityConstant.AUTH_AUTHORIZED_GRANT_PASSWORD);
+        String password = integrationAuthentication.getAuthParameterByKey(SecurityConstant.AUTH_AUTHORIZED_GRANT_PASSWORD);
 
         LoginAbstractFegin loginAbstractFegin = ApplicationContextHelper.getBean(integrationAuthentication.getFindUserClassName(), LoginAbstractFegin.class);
         AuthUser sysUserAuthentication=loginAbstractFegin.findUserById(openId);
@@ -52,7 +52,7 @@ public class WechatIntegrationAuthenticator implements IntegrationAuthenticator 
 
     @Override
     public boolean prepare(IntegrationAuthentication integrationAuthentication, Map<String,Object> additionalInformation, HttpServletRequest request, HttpServletResponse response) {
-        String password = integrationAuthentication.getAuthParameter(SecurityConstant.AUTH_AUTHORIZED_GRANT_PASSWORD);
+        String password = integrationAuthentication.getAuthParameterByKey(SecurityConstant.AUTH_AUTHORIZED_GRANT_PASSWORD);
 
 
         String oAuth2AccessToken = wechatFegin.oauth2getAccessToken(String.valueOf(additionalInformation.get(SecurityConstant.WECHAT_APPID_PARAM_NAME)),

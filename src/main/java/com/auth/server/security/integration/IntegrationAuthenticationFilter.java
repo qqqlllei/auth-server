@@ -20,9 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 
 @Component
@@ -52,7 +50,14 @@ public class IntegrationAuthenticationFilter extends OncePerRequestFilter implem
         if(requestMatcher.matches(request)){
             IntegrationAuthentication integrationAuthentication = new IntegrationAuthentication();
             integrationAuthentication.setAuthType(request.getParameter(SecurityConstant.AUTH_TYPE_PARM_NAME));
-            integrationAuthentication.setAuthParameters(request.getParameterMap());
+            Enumeration<String> enumeration =  request.getParameterNames();
+            Map<String,String> params = new HashMap<>();
+            while (enumeration.hasMoreElements()){
+                String key = enumeration.nextElement();
+                String value = request.getParameter(key);
+                params.put(key,value);
+            }
+            integrationAuthentication.setAuthParameters(params);
             IntegrationAuthenticationContext.set(integrationAuthentication);
             try{
 
@@ -87,7 +92,7 @@ public class IntegrationAuthenticationFilter extends OncePerRequestFilter implem
 
         for (IntegrationAuthenticator authenticator: authenticators) {
             if(authenticator.support(integrationAuthentication)){
-                String clientId = integrationAuthentication.getAuthParameter(SecurityConstant.WECHAT_CLIENT_ID_PARAM_NAME);
+                String clientId = integrationAuthentication.getAuthParameterByKey(SecurityConstant.WECHAT_CLIENT_ID_PARAM_NAME);
                 ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
                 Map<String,Object> additionalInformation =  clientDetails.getAdditionalInformation();
                 integrationAuthentication.setFindUserClassName(String.valueOf(additionalInformation.get(SecurityConstant.AUTH_FIND_USER_INTERFACE_CLASS)));

@@ -3,6 +3,7 @@ package com.auth.server.security;
 import com.auth.server.security.constants.SecurityConstant;
 import com.auth.server.security.integration.AuthFailureHandler;
 import com.auth.server.util.ApplicationContextHelper;
+import com.auth.server.util.AuthHandlerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -14,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,6 +28,9 @@ public class AuthAuthenticationFailureHandler extends SimpleUrlAuthenticationFai
     @Autowired
     private ClientDetailsService clientDetailsService;
 
+    @Autowired
+    private AuthClientProperties authClientProperties;
+
     @Override
     public void onAuthenticationFailure(HttpServletRequest request,
                                         HttpServletResponse response, AuthenticationException exception)
@@ -35,8 +40,9 @@ public class AuthAuthenticationFailureHandler extends SimpleUrlAuthenticationFai
         String clientId = request.getParameter(SecurityConstant.REQUEST_CLIENT_ID);
         ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
         Map<String, Object> additionalInformation = clientDetails.getAdditionalInformation();
-        String authFailureHandlerBeanName =String.valueOf(additionalInformation.get(SecurityConstant.AUTH_FAILURE_HANDLER));
-        AuthFailureHandler authenticationFailureHandler =  ApplicationContextHelper.getBean(authFailureHandlerBeanName,AuthFailureHandler.class);
+        String authType = request.getParameter(SecurityConstant.AUTH_TYPE_PARM_NAME);
+        String authFailHandlerBeanName = AuthHandlerUtil.getFailHandlerByType(authType,additionalInformation,authClientProperties);
+        AuthFailureHandler authenticationFailureHandler =  ApplicationContextHelper.getBean(authFailHandlerBeanName,AuthFailureHandler.class);
         authenticationFailureHandler.onAuthenticationFailure(request,response,exception);
     }
 

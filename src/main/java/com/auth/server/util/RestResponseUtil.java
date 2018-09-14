@@ -20,6 +20,10 @@ public class RestResponseUtil {
     private static String WECHAT_OAUTH_ERROR_MSG="微信授权错误";
 
 
+    private static String USERNAME_PASSWORD_OAUTH_ERROR="4002";
+    private static String USERNAME_PASSWORD_OAUTH_ERROR_MSG="用户名密码错误";
+
+
     private static void authErrorResponse(String resultCode, String resultMsg, HttpServletResponse response){
 
         JSONObject result = new JSONObject();
@@ -46,5 +50,10 @@ public class RestResponseUtil {
 
     public static void wechatAuthError(HttpServletResponse response){
         authErrorResponse(WECHAT_OAUTH_ERROR,WECHAT_OAUTH_ERROR_MSG,response);
+    }
+
+
+    public static void usernamePasswordAuthError(HttpServletResponse response){
+        authErrorResponse(USERNAME_PASSWORD_OAUTH_ERROR,USERNAME_PASSWORD_OAUTH_ERROR_MSG,response);
     }
 }

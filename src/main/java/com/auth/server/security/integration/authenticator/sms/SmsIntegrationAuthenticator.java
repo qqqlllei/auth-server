@@ -33,10 +33,10 @@ public class SmsIntegrationAuthenticator implements IntegrationAuthenticator {
     @Override
     public AuthUser authenticate(IntegrationAuthentication integrationAuthentication) {
 
-        String code = integrationAuthentication.getAuthParameter(SecurityConstant.AUTH_AUTHORIZED_GRANT_PASSWORD);
+        String code = integrationAuthentication.getAuthParameterByKey(SecurityConstant.AUTH_AUTHORIZED_GRANT_PASSWORD);
 
 
-        String phone = integrationAuthentication.getAuthParameter(SecurityConstant.SMS_LOGIN_PHONE_PARAM_NAME);
+        String phone = integrationAuthentication.getAuthParameterByKey(SecurityConstant.SMS_LOGIN_PHONE_PARAM_NAME);
 
         //get user by phone
         LoginAbstractFegin loginAbstractFegin = ApplicationContextHelper.getBean(integrationAuthentication.getFindUserClassName(), LoginAbstractFegin.class);
@@ -51,8 +51,8 @@ public class SmsIntegrationAuthenticator implements IntegrationAuthenticator {
 
     @Override
     public boolean prepare(IntegrationAuthentication integrationAuthentication, Map<String,Object> additionalInformation, HttpServletRequest request, HttpServletResponse response) {
-        String smsCode = integrationAuthentication.getAuthParameter(SecurityConstant.AUTH_AUTHORIZED_GRANT_PASSWORD);
-        String username = integrationAuthentication.getAuthParameter(SecurityConstant.SMS_LOGIN_PHONE_PARAM_NAME);
+        String smsCode = integrationAuthentication.getAuthParameterByKey(SecurityConstant.AUTH_AUTHORIZED_GRANT_PASSWORD);
+        String username = integrationAuthentication.getAuthParameterByKey(SecurityConstant.SMS_LOGIN_PHONE_PARAM_NAME);
 
         String code = stringRedisTemplate.opsForValue().get(username+"_"+smsCode);
         if (StringUtils.isBlank(code)) {

@@ -36,7 +36,7 @@ public class DingDingIntegrationAuthenticator implements IntegrationAuthenticato
 
     @Override
     public boolean prepare(IntegrationAuthentication integrationAuthentication, Map<String,Object> additionalInformation , HttpServletRequest request, HttpServletResponse response) {
-        String code = integrationAuthentication.getAuthParameter(SecurityConstant.DING_DING_LOGIN_CODE_PARAM_NAME);
+        String code = integrationAuthentication.getAuthParameterByKey(SecurityConstant.DING_DING_LOGIN_CODE_PARAM_NAME);
         String phone = dingTokenServer.getUserPhoneByAuthCode(code);
         integrationAuthentication.setUsername(phone);
 

@@ -13,6 +13,8 @@ public class SecurityConstant {
 
     public static final String AUTH_AUTHORIZED_GRANT_PASSWORD ="password";
 
+    public static final String AUTH_AUTHORIZED_GRANT_USERNAME ="username";
+
     public static final String AUTH_AUTHORIZED_GRANT_LOGIN_NAME ="loginName";
 
     public static final String WECHAT_AUTH_TYPE = "wechat";
@@ -73,6 +75,8 @@ public class SecurityConstant {
     public static final String AUTH_DEFAULT_FIND_USER_INTERFACE_CLASS="com.auth.server.fegin.UserFegin";
 
     public static final String AUTH_LOGIN_SUCCESS_STATUS="0000";
+
+    public static final String AUTH_LOGIN_FAIL_STATUS="0001";
 
     public static final String AUTH_LOGIN_CODE_NAME="resultCode";
 

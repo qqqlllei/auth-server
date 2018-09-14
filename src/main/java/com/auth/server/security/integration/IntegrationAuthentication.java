@@ -9,14 +9,16 @@ public class IntegrationAuthentication {
     private String authType;
     private String username;
     private String findUserClassName;
-    private Map<String,String[]> authParameters;
+    private Map<String,String> authParameters;
 
-    public String getAuthParameter(String paramter){
-        String[] values = this.authParameters.get(paramter);
-        if(values != null && values.length > 0){
-            return values[0];
-        }
-        return null;
+    public String getAuthParameterByKey(String paramter){
+        String values = this.authParameters.get(paramter);
+        return values;
+    }
+
+
+    public Map<String, String> getAuthParameters() {
+        return authParameters;
     }
 
     public String getAuthType() {
@@ -35,7 +37,7 @@ public class IntegrationAuthentication {
         this.username = username;
     }
 
-    public void setAuthParameters(Map<String, String[]> authParameters) {
+    public void setAuthParameters(Map<String, String> authParameters) {
         this.authParameters = authParameters;
     }
 
