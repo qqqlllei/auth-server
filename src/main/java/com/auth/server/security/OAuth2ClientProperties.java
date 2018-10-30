@@ -7,7 +7,7 @@ public class OAuth2ClientProperties {
 
     private String clientId;
     private String clientSecret;
-    private int accessTokenValidateSeconds = 7200;
+    private int accessTokenValidateSeconds = 2592000;
     private int refreshTokenValiditySeconds = 2592000;
     private String scope;
     private String clientType;

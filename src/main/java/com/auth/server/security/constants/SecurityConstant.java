@@ -51,6 +51,8 @@ public class SecurityConstant {
 
     public static final String DING_DING_AUTH_TYPE = "dingding";
 
+    public static final String OUTER_SERVER_AUTH_TYPE="outerServer";
+
     public static final String REQUEST_CLIENT_ID = "clientId";
 
     public static final String TOKEN_VALUE="tokenValue";

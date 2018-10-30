@@ -54,7 +54,7 @@ public class AuthenticationWeb {
 
             if (oAuth2AccessToken.isExpired()) {
                 result.put("resultCode","2222");
-                result.put("resultMsg","Token= "+token+" 解析失败");
+                result.put("resultMsg","Token= "+token+" 已过期");
                 return result;
             }
 

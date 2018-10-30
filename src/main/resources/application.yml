@@ -30,7 +30,6 @@ oauth:
     clients[0]:
       clientId: out-wechat
       clientSecret: outSecret
-      accessTokenValidateSeconds: 20
       scope: "*"
       clientType: wechat
       wechatAppId: wxa4ea35b0027a480d
@@ -41,12 +40,10 @@ oauth:
     clients[1]:
       clientId: collection-server
       clientSecret: collectionSecret
-      accessTokenValidateSeconds: 7200
       scope: "*"
     clients[2]:
       clientId: customer-wechat
       clientSecret: customerSecret
-      accessTokenValidateSeconds: 7200
       scope: "*"
       clientType: wechat
       wechatAppId: wxa4ea35b0027a480d #wx77845210c27faa3a
@@ -59,7 +56,13 @@ oauth:
     clients[3]:
       clientId: post-loan-back
       clientSecret: postLoanBackSecret
-      accessTokenValidateSeconds: 7200
+      scope: "*"
+
+    clients[4]:
+      clientId: outer-server
+      clientSecret: outerServerSecret
+      clientType: outerServer
+      accessTokenValidateSeconds: 120
       scope: "*"
 
     handlers[0]:
@@ -76,6 +79,12 @@ oauth:
       auth_type: password
       authSuccessHandler: passwordAuthenticationSuccessHandler
       authFailureHandler: passwordAuthenticationFailureHandler
+
+    handlers[3]:
+      auth_type: outerServer
+      authSuccessHandler: outerServerPwdAuthenticatorSuccessHandler
+      authFailureHandler: passwordAuthenticationFailureHandler
+
 
 ding:
   appid: dingoanvwzywxpqf7wh02u

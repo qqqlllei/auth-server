@@ -8,6 +8,7 @@ import com.auth.server.util.AuthHandlerUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.*;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
@@ -46,7 +47,8 @@ public class AuthAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
 		TokenRequest tokenRequest = new TokenRequest(null, clientId, clientDetails.getScope(), "custom");
 		OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
 		OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request, authentication);
-		OAuth2AccessToken token =defaultTokenServices.createAccessToken(oAuth2Authentication);
+		defaultTokenServices.setAccessTokenValiditySeconds(clientDetails.getAccessTokenValiditySeconds());
+		OAuth2AccessToken token =  defaultTokenServices.createAccessToken(oAuth2Authentication);
 		String authType = request.getParameter(SecurityConstant.AUTH_TYPE_PARM_NAME);
 		Map<String,Object> additionalInformation = clientDetails.getAdditionalInformation();
 		String authSuccessHandlerBeanName = AuthHandlerUtil.getSuccessHandlerByType(authType,additionalInformation,authClientProperties);
