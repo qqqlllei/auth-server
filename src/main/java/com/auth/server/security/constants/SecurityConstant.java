@@ -5,7 +5,7 @@ package com.auth.server.security.constants;
  */
 public class SecurityConstant {
 
-    public static final String AUTH_TYPE_PARM_NAME = "auth_type";
+    public static final String AUTH_TYPE_PARM_NAME = "authType";
 
     public static final String OAUTH_TOKEN_URL = "/oauth/token";
 

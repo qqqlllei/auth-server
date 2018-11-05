@@ -56,6 +56,7 @@ oauth:
     clients[3]:
       clientId: post-loan-back
       clientSecret: postLoanBackSecret
+      accessTokenValidateSeconds: 7200
       scope: "*"
 
     clients[4]:
@@ -66,22 +67,22 @@ oauth:
       scope: "*"
 
     handlers[0]:
-      auth_type: wechat
+      authType: wechat
       authSuccessHandler: wechatAuthenticationSuccessHandler
       authFailureHandler: wechatAuthenticationFailureHandler
 
     handlers[1]:
-      auth_type: sms
+      authType: sms
       authSuccessHandler: smsAuthenticationSuccessHandler
       authFailureHandler: smsAuthenticationFailureHandler
 
     handlers[2]:
-      auth_type: password
+      authType: password
       authSuccessHandler: passwordAuthenticationSuccessHandler
       authFailureHandler: passwordAuthenticationFailureHandler
 
     handlers[3]:
-      auth_type: outerServer
+      authType: outerServer
       authSuccessHandler: outerServerPwdAuthenticatorSuccessHandler
       authFailureHandler: passwordAuthenticationFailureHandler
 
