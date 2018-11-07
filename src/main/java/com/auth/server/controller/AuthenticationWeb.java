@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -52,24 +53,26 @@ public class AuthenticationWeb {
                 return result;
             }
 
-            if (oAuth2AccessToken.isExpired()) {
-                result.put("resultCode","2222");
-                result.put("resultMsg","Token= "+token+" 已过期");
-                return result;
-            }
-
-
-
             result = oAuth2AccessToken.getAdditionalInformation();
+
             if(result.containsKey(SecurityConstant.AUTH_SESSION_KEY) && result.containsKey(SecurityConstant.REQUEST_CLIENT_ID)){
                 String sessionKey = String.valueOf(result.get(SecurityConstant.AUTH_SESSION_KEY));
                 String sessionValue = stringRedisTemplate.opsForValue().get(sessionKey);
                 String clientId = String.valueOf(result.get(SecurityConstant.REQUEST_CLIENT_ID));
                 ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
                 stringRedisTemplate.opsForValue().set(sessionKey,sessionValue,clientDetails.getAccessTokenValiditySeconds(), TimeUnit.SECONDS);
+                result.put("resultCode","0000");
+                return result;
             }
 
-            result.put("resultCode","0000");
+
+            if (oAuth2AccessToken.isExpired()) {
+                result.clear();
+                result.put("resultCode","2222");
+                result.put("resultMsg","Token= "+token+" 已过期");
+                return result;
+            }
+
         }catch(Exception e){
             result.put("resultCode","3333");
             result.put("resultMsg","Token= "+token+" 已被损坏");

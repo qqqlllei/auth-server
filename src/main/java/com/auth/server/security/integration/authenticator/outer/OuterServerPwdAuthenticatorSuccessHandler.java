@@ -33,7 +33,6 @@ public class OuterServerPwdAuthenticatorSuccessHandler implements AuthSuccessHan
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication, OAuth2AccessToken token, OAuth2Authentication oAuth2Authentication, AuthUser sysUserAuthentication, ClientDetails clientDetails) throws ServletException, IOException {
         String tokenValue =token.getValue();
-        token.getExpiration();
         token = jwtAccessTokenConverter.enhance(token,oAuth2Authentication);
         JSONObject jsonObject = (JSONObject) JSONObject.toJSON(sysUserAuthentication);
         jsonObject.put(SecurityConstant.TOKEN_VALUE,tokenValue);
