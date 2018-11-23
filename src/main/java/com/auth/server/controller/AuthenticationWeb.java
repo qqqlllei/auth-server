@@ -71,6 +71,7 @@ public class AuthenticationWeb {
                 result.put("resultMsg","Token= "+token+" 已过期");
                 return result;
             }
+            result.put("resultCode","0000");
 
         }catch(Exception e){
             result.put("resultCode","3333");
