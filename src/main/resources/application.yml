@@ -6,7 +6,7 @@ spring:
   redis:
     host: 10.33.80.101
     port: 6379
-
+    password: 123456
   zipkin:
     kafka:
       topic: zipkin
